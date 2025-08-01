@@ -38,9 +38,9 @@ export default function Welcome() {
       })
     }
 
-    // Parallax effect
+    // Parallax effect - disable on mobile for performance
     const handleMouseMove = (e) => {
-      if (!mounted) return
+      if (!mounted || window.innerWidth < 768) return
       const { clientX, clientY } = e
       const x = (clientX / window.innerWidth - 0.5) * 20
       const y = (clientY / window.innerHeight - 0.5) * 20
@@ -57,7 +57,7 @@ export default function Welcome() {
   }, [backgroundOpacity, textOpacity, buttonScale, backgroundPositionX, backgroundPositionY, user?.email])
 
   const backgroundImage = useMotionTemplate`radial-gradient(
-    circle at calc(50% + ${backgroundPositionX}px) calc(50% + ${backgroundPositionY}px),
+    circle at calc(50% + ${window.innerWidth < 768 ? 0 : backgroundPositionX}px) calc(50% + ${window.innerWidth < 768 ? 0 : backgroundPositionY}px),
     #1a1a2e 0%,
     #16213e 30%,
     #0f3460 60%,
@@ -87,7 +87,7 @@ export default function Welcome() {
   }
 
   return (
-    <div className="min-h-screen overflow-hidden relative flex items-center justify-center p-4">
+    <div className="min-h-screen overflow-hidden relative flex items-center justify-center p-4 sm:p-6">
       {/* Animated gradient background */}
       <motion.div
         className="absolute inset-0"
@@ -97,18 +97,18 @@ export default function Welcome() {
         }}
       />
 
-      {/* Decorative elements */}
+      {/* Decorative elements - reduced size on mobile */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.3 }}
         transition={{ delay: 1 }}
-        className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-amber-400 blur-3xl"
+        className="absolute top-1/4 left-1/4 w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-amber-400 blur-xl sm:blur-3xl"
       />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.2 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-1/3 right-1/4 w-40 h-40 rounded-full bg-orange-500 blur-3xl"
+        className="absolute bottom-1/3 right-1/4 w-24 h-24 sm:w-40 sm:h-40 rounded-full bg-orange-500 blur-xl sm:blur-3xl"
       />
 
       {/* Main content */}
@@ -121,18 +121,18 @@ export default function Welcome() {
           stiffness: 100,
           delay: 0.3
         }}
-        className="relative z-10 w-full max-w-2xl text-center"
+        className="relative z-10 w-full max-w-2xl text-center mx-4 sm:mx-0"
       >
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="backdrop-blur-lg bg-black/40 rounded-3xl border border-white/10 shadow-2xl overflow-hidden p-8"
+          className="backdrop-blur-lg bg-black/40 rounded-3xl border border-white/10 shadow-2xl overflow-hidden p-6 sm:p-8"
         >
           {/* Header */}
-          <div className="mb-8 overflow-hidden">
+          <div className="mb-6 sm:mb-8 overflow-hidden">
             <motion.h1 
-              className={`${cormorant.className} text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400 mb-4`}
+              className={`${cormorant.className} text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400 mb-3 sm:mb-4`}
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.5 }}
@@ -147,15 +147,15 @@ export default function Welcome() {
             />
           </div>
 
-          {/* Welcome message */}
+          {/* Welcome message - adjusted text size */}
           <motion.p 
-            className={`${cormorant.className} text-xl text-amber-100 mb-8`}
+            className={`${cormorant.className} text-lg sm:text-xl text-amber-100 mb-6 sm:mb-8`}
             style={{ opacity: textOpacity }}
           >
-            Welcome back, <span className="text-white font-medium">{user.email}</span>
+            Welcome back, <span className="text-white font-medium break-all">{user.email}</span>
           </motion.p>
 
-          {/* Main action button */}
+          {/* Main action button - full width on mobile */}
           <motion.button
             style={{ scale: buttonScale, opacity: textOpacity }}
             whileHover={{ 
@@ -164,14 +164,14 @@ export default function Welcome() {
             }}
             whileTap={{ scale: 0.98 }}
             onClick={() => router.push('/first')}
-            className={`${cormorant.className} relative overflow-hidden w-full max-w-xs mx-auto py-4 px-6 text-lg font-bold text-black bg-gradient-to-br from-amber-400 to-orange-500 rounded-full shadow-xl mb-6`}
+            className={`${cormorant.className} relative overflow-hidden w-full sm:max-w-xs mx-auto py-3 sm:py-4 px-6 text-base sm:text-lg font-bold text-black bg-gradient-to-br from-amber-400 to-orange-500 rounded-full shadow-xl mb-4 sm:mb-6`}
           >
             <span className="relative z-10">Let&apos;s Start Cooking</span>
             <motion.span
               initial={{ x: -100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 1.2 }}
-              className="absolute right-6 top-1/2 -translate-y-1/2 text-2xl"
+              className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 text-xl sm:text-2xl"
             >
               →
             </motion.span>
@@ -183,12 +183,12 @@ export default function Welcome() {
             />
           </motion.button>
 
-          {/* Footer with logout */}
+          {/* Footer with logout - stacked on mobile */}
           <motion.div 
-            className="flex justify-between items-center pt-4 border-t border-white/10"
+            className="flex flex-col sm:flex-row sm:justify-between sm:items-center pt-4 border-t border-white/10 gap-4 sm:gap-0"
             style={{ opacity: textOpacity }}
           >
-            <p className="text-sm text-white/50">
+            <p className="text-sm text-white/50 text-center sm:text-left">
               Ready to create culinary magic
             </p>
             
@@ -200,7 +200,7 @@ export default function Welcome() {
               }}
               whileTap={{ scale: 0.95 }}
               disabled={isLoading}
-              className={`${cormorant.className} text-sm bg-gradient-to-br from-red-500 to-red-600 text-white px-4 py-2 rounded-full shadow-md`}
+              className={`${cormorant.className} text-sm bg-gradient-to-br from-red-500 to-red-600 text-white px-4 py-2 rounded-full shadow-md sm:ml-4`}
             >
               {isLoading ? 'Signing Out...' : 'Log Out'}
             </motion.button>

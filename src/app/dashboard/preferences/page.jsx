@@ -54,7 +54,7 @@ export default function CuisineSelection() {
   )`
 
   return (
-    <div className="min-h-screen overflow-hidden relative flex items-center justify-center p-4">
+    <div className="min-h-screen overflow-hidden relative flex items-center justify-center p-4 sm:p-6">
       {/* Animated gradient background */}
       <motion.div
         className="absolute inset-0"
@@ -69,13 +69,13 @@ export default function CuisineSelection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.15 }}
         transition={{ delay: 0.5 }}
-        className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-amber-400 blur-[100px]"
+        className="absolute top-1/4 left-1/4 w-32 h-32 sm:w-64 sm:h-64 rounded-full bg-amber-400 blur-[50px] sm:blur-[100px]"
       />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.1 }}
         transition={{ delay: 0.7 }}
-        className="absolute bottom-1/3 right-1/4 w-72 h-72 rounded-full bg-orange-500 blur-[100px]"
+        className="absolute bottom-1/3 right-1/4 w-36 h-36 sm:w-72 sm:h-72 rounded-full bg-orange-500 blur-[50px] sm:blur-[100px]"
       />
 
       {/* Main card */}
@@ -84,25 +84,25 @@ export default function CuisineSelection() {
           opacity: cardOpacity,
           y: cardY
         }}
-        className="relative z-10 w-full max-w-2xl"
+        className="relative z-10 w-full max-w-2xl mx-2 sm:mx-0"
       >
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="backdrop-blur-lg bg-gray-900/70 rounded-3xl border border-white/10 shadow-2xl overflow-hidden p-8"
+          className="backdrop-blur-lg bg-gray-900/70 rounded-xl sm:rounded-3xl border border-white/10 shadow-2xl overflow-hidden p-4 sm:p-8"
         >
           {/* Header */}
           <motion.div
             initial={{ y: -10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="mb-8"
+            className="mb-6 sm:mb-8"
           >
-            <h1 className={`${cormorant.className} text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400 mb-2`}>
+            <h1 className={`${cormorant.className} text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400 mb-1 sm:mb-2`}>
               Select Your Culinary Style
             </h1>
-            <p className="text-gray-400">
+            <p className="text-gray-400 text-sm sm:text-base">
               Choose a cuisine that inspires your recipe
             </p>
           </motion.div>
@@ -112,26 +112,26 @@ export default function CuisineSelection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="mb-8"
+            className="mb-6 sm:mb-8"
           >
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
               {['Desi', 'Western', 'Asian', 'Fusion', 'Mediterranean'].map((style) => (
                 <motion.button
                   key={style}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleInputChange('cuisine', style)}
-                  className={`p-4 rounded-xl border transition-all ${
+                  className={`p-3 sm:p-4 rounded-lg sm:rounded-xl border transition-all text-sm sm:text-base ${
                     inputs.cuisine === style 
                       ? 'border-amber-400 bg-amber-500/10 text-amber-100 shadow-lg' 
                       : 'border-gray-700 bg-gray-800/50 text-gray-300 hover:border-gray-600'
                   }`}
                 >
-                  <span className="block text-lg font-medium">{style}</span>
+                  <span className="block font-medium">{style}</span>
                   {inputs.cuisine === style && (
                     <motion.div 
                       layoutId="cuisineIndicator"
-                      className="mt-2 h-0.5 bg-amber-400 rounded-full"
+                      className="mt-1 sm:mt-2 h-0.5 bg-amber-400 rounded-full"
                       initial={false}
                     />
                   )}
@@ -142,7 +142,7 @@ export default function CuisineSelection() {
 
           {/* Navigation buttons */}
           <motion.div 
-            className="flex justify-between pt-4 border-t border-white/10"
+            className="flex justify-between pt-4 border-t border-white/10 gap-2 sm:gap-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
@@ -151,9 +151,9 @@ export default function CuisineSelection() {
               whileHover={{ backgroundColor: 'rgba(255,255,255,0.05)' }}
               whileTap={{ scale: 0.98 }}
               onClick={() => router.back()}
-              className="px-6 py-3 rounded-lg border border-gray-700 text-gray-300 flex items-center"
+              className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg border border-gray-700 text-gray-300 flex items-center text-sm sm:text-base"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
               </svg>
               Back
@@ -168,12 +168,12 @@ export default function CuisineSelection() {
               whileTap={{ scale: 0.98 }}
               onClick={() => router.push('/dashboard/details')}
               disabled={!inputs.cuisine}
-              className={`px-8 py-3 rounded-lg bg-gradient-to-r from-amber-600 to-orange-600 text-white flex items-center ${
+              className={`px-4 sm:px-8 py-2 sm:py-3 rounded-lg bg-gradient-to-r from-amber-600 to-orange-600 text-white flex items-center text-sm sm:text-base ${
                 !inputs.cuisine ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
               Refine Flavors
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 ml-1 sm:ml-2" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </motion.button>

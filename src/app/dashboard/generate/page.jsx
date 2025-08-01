@@ -99,10 +99,8 @@ export default function GenerateRecipe() {
     }
   }
 
-  
-
   return (
-    <div className="min-h-screen overflow-hidden relative flex items-center justify-center p-4">
+    <div className="min-h-screen overflow-hidden relative flex items-center justify-center p-4 sm:p-6">
       {/* Animated gradient background */}
       <motion.div
         className="absolute inset-0"
@@ -112,67 +110,67 @@ export default function GenerateRecipe() {
         }}
       />
 
-      {/* Decorative elements */}
+      {/* Decorative elements - adjusted blur for mobile */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.15 }}
         transition={{ delay: 0.5 }}
-        className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-amber-400 blur-[100px]"
+        className="absolute top-1/4 left-1/4 w-40 h-40 sm:w-64 sm:h-64 rounded-full bg-amber-400 blur-[60px] sm:blur-[100px]"
       />
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.1 }}
         transition={{ delay: 0.7 }}
-        className="absolute bottom-1/3 right-1/4 w-72 h-72 rounded-full bg-orange-500 blur-[100px]"
+        className="absolute bottom-1/3 right-1/4 w-48 h-48 sm:w-72 sm:h-72 rounded-full bg-orange-500 blur-[60px] sm:blur-[100px]"
       />
 
-      {/* Main card */}
+      {/* Main card - responsive width */}
       <motion.div
         style={{ 
           opacity: cardOpacity,
           y: cardY
         }}
-        className="relative z-10 w-full max-w-2xl"
+        className="relative z-10 w-full max-w-xs sm:max-w-md md:max-w-2xl"
       >
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="backdrop-blur-lg bg-gray-900/70 rounded-3xl border border-white/10 shadow-2xl overflow-hidden p-8"
+          className="backdrop-blur-lg bg-gray-900/70 rounded-3xl border border-white/10 shadow-2xl overflow-hidden p-6 sm:p-8"
         >
           {/* Header */}
           <motion.div
             initial={{ y: -10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="mb-8"
+            className="mb-6 sm:mb-8"
           >
-            <h1 className={`${cormorant.className} text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400 mb-2`}>
+            <h1 className={`${cormorant.className} text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400 mb-2`}>
               Finalize Your Recipe
             </h1>
-            <p className="text-gray-400">
+            <p className="text-gray-400 text-sm sm:text-base">
               Adjust these final parameters for perfect results
             </p>
           </motion.div>
 
-          {/* Skill Level */}
+          {/* Skill Level - responsive grid */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="mb-8"
+            className="mb-6 sm:mb-8"
           >
-            <label className="block text-amber-100 mb-3 font-medium">
+            <label className="block text-amber-100 mb-3 font-medium text-sm sm:text-base">
               Chef Skill Level
             </label>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               {['beginner', 'intermediate', 'pro'].map((level) => (
                 <motion.button
                   key={level}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleInputChange('skillLevel', level)}
-                  className={`p-3 rounded-lg border transition-all capitalize ${
+                  className={`p-2 sm:p-3 rounded-lg border transition-all capitalize text-xs sm:text-sm ${
                     inputs.skillLevel === level
                       ? 'border-amber-400 bg-amber-500/10 text-amber-100 shadow-lg'
                       : 'border-gray-700 bg-gray-800/50 text-gray-300 hover:border-gray-600'
@@ -182,7 +180,7 @@ export default function GenerateRecipe() {
                   {inputs.skillLevel === level && (
                     <motion.div 
                       layoutId="skillIndicator"
-                      className="mt-2 h-0.5 bg-amber-400 rounded-full"
+                      className="mt-1 sm:mt-2 h-0.5 bg-amber-400 rounded-full"
                       initial={false}
                     />
                   )}
@@ -196,24 +194,24 @@ export default function GenerateRecipe() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
-            className="mb-10"
+            className="mb-8 sm:mb-10"
           >
-            <label className="block text-amber-100 mb-3 font-medium">
+            <label className="block text-amber-100 mb-3 font-medium text-sm sm:text-base">
               Cooking Time
             </label>
             <div className="relative">
               <select
                 value={inputs.timeAvailable}
                 onChange={(e) => handleInputChange('timeAvailable', e.target.value)}
-                className="w-full p-4 border border-gray-700 bg-gray-800/50 text-white rounded-lg appearance-none cursor-pointer"
+                className="w-full p-3 sm:p-4 border border-gray-700 bg-gray-800/50 text-white rounded-lg appearance-none cursor-pointer text-sm sm:text-base"
               >
                 <option value="15">Quick (15 mins)</option>
                 <option value="30">Medium (30 mins)</option>
                 <option value="45">Long (45 mins)</option>
                 <option value="60">Extended (60+ mins)</option>
               </select>
-              <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                <svg className="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </div>
@@ -233,7 +231,7 @@ export default function GenerateRecipe() {
               if (success) router.push('/dashboard/results')
             }}
             disabled={!recipeRequest.trim() || isLoading}
-            className={`${cormorant.className} relative overflow-hidden w-full py-4 px-6 rounded-lg font-medium text-white transition-colors text-lg ${
+            className={`${cormorant.className} relative overflow-hidden w-full py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-medium text-white transition-colors text-base sm:text-lg ${
               isLoading
                 ? 'bg-amber-500/80 cursor-not-allowed'
                 : 'bg-gradient-to-r from-amber-500 to-orange-500 shadow-lg'
@@ -242,11 +240,11 @@ export default function GenerateRecipe() {
             <span className="relative z-10">
               {isLoading ? (
                 <span className="flex items-center justify-center">
-                  <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 sm:h-5 sm:w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  Crafting Your Recipe...
+                  Crafting...
                 </span>
               ) : 'Generate Masterpiece'}
             </span>
@@ -262,7 +260,7 @@ export default function GenerateRecipe() {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-4 p-3 rounded-md bg-red-900/30 border border-red-700/50 text-red-200 text-center text-sm"
+              className="mt-3 sm:mt-4 p-2 sm:p-3 rounded-md bg-red-900/30 border border-red-700/50 text-red-200 text-center text-xs sm:text-sm"
             >
               {error}
             </motion.div>
