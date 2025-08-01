@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Live demo,Vercel link:
+https://magic-sage.vercel.app/
 
-## Getting Started
 
-First, run the development server:
+RecipeCraft
+AI-powered recipe generator with secure authentication.
 
-```bash
+Key Features
+Passwordless magic link login
+
+AI-generated recipes using GroqCloud API with Llama 3 model
+
+Customizable recipe preferences (cuisine, dietary needs, skill level)
+
+Clean, responsive interface with smooth animations
+
+How It Works
+AI Backend:
+
+Uses n8n workflow connected to GroqCloud's Llama 3 model
+
+Processes user inputs to generate tailored recipes
+
+API endpoint: https://primary-production-03db.up.railway.app/webhook/rec
+
+Frontend:
+
+Next.js with Supabase authentication
+
+Multi-step form for recipe preferences
+
+Animated transitions between screens
+
+Setup
+Install dependencies:
+
+bash
+npm install
+Create .env.local with:
+
+text
+NEXT_PUBLIC_SUPABASE_URL=your_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
+Run development server:
+
+bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Deployment
+Push to Vercel:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+bash
+vercel
+Set the same environment variables in your Vercel project settings.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Technical Notes
+Authentication handled by Supabase
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+State management with Zustand
 
-## Learn More
+Form data persists across steps
 
-To learn more about Next.js, take a look at the following resources:
+Recipe output formatted for easy reading
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
