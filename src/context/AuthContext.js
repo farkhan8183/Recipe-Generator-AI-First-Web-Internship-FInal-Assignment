@@ -11,35 +11,35 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
   const router = useRouter()
 
-  const checkUser = useCallback(async () => {
-    const { data: { user } } = await supabase.auth.getUser()
-    setUser(user)
-    setLoading(false)
-  }, [])
+  const handleAuthChange = useCallback(async (event, session) => {
+    const currentUser = session?.user
+    setUser(currentUser ?? null)
+    
+    if (event === 'SIGNED_IN') {
+      toast.success('Logged in successfully!')
+      router.push('/dashboard')
+    }
+    if (event === 'SIGNED_OUT') {
+      toast.success('Logged out successfully!')
+      router.push('/')
+    }
+  }, [router])
 
   useEffect(() => {
-    checkUser()
+    const initializeAuth = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      setUser(user)
+      setLoading(false)
 
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        const currentUser = session?.user
-        setUser(currentUser ?? null)
-        
-        if (event === 'SIGNED_IN') {
-          toast.success('Logged in successfully!')
-          router.push('/dashboard')
-        }
-        if (event === 'SIGNED_OUT') {
-          toast.success('Logged out successfully!')
-          router.push('/')
-        }
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(handleAuthChange)
+      
+      return () => {
+        subscription?.unsubscribe()
       }
-    )
-
-    return () => {
-      authListener?.subscription.unsubscribe()
     }
-  }, [checkUser, router])
+
+    initializeAuth()
+  }, [handleAuthChange])
 
   const value = {
     user,
