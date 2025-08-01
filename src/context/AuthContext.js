@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState, useCallback } from 'react'
 import { supabase } from '@/utils/supabaseClient'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
@@ -11,13 +11,13 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
   const router = useRouter()
 
-  useEffect(() => {
-    const checkUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      setUser(user)
-      setLoading(false)
-    }
+  const checkUser = useCallback(async () => {
+    const { data: { user } } = await supabase.auth.getUser()
+    setUser(user)
+    setLoading(false)
+  }, [])
 
+  useEffect(() => {
     checkUser()
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
     return () => {
       authListener?.subscription.unsubscribe()
     }
-  }, [])
+  }, [checkUser, router])
 
   const value = {
     user,
