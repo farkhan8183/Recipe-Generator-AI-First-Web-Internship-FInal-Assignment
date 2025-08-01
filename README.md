@@ -1,5 +1,8 @@
 Live demo,Vercel link:
 https://magic-sage.vercel.app/
+Demo Video:
+https://drive.google.com/file/d/1eCu42KqYEpH92g4GWCxUBL3QMvQcniqK/view?usp=drive_link
+
 
 
 RecipeCraft:
