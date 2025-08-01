@@ -2,10 +2,10 @@ Live demo,Vercel link:
 https://magic-sage.vercel.app/
 
 
-RecipeCraft
+RecipeCraft:
 AI-powered recipe generator with secure authentication.
 
-Key Features
+Key Features:
 Passwordless magic link login
 
 AI-generated recipes using GroqCloud API with Llama 3 model
@@ -17,7 +17,7 @@ Clean, responsive interface with smooth animations
 How It Works
 AI Backend:
 
-Uses n8n workflow connected to GroqCloud's Llama 3 model
+Uses n8n workflow(deployed on Railway) connected to GroqCloud's Llama 3 model
 
 Processes user inputs to generate tailored recipes
 
