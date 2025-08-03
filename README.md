@@ -30,15 +30,26 @@ Tech Stack:
 
 >> Magic link "Login" using Supabase.
 
+Core Feature( AI + n8n Integration):
+
+LLM-Powered Backend: AI logic is fully managed by an n8n workflow that sends input to LLaMA 3 (70B).
+
+Self-Hosted Workflow: n8n is deployed on Railway with custom HTTP Webhook endpoints.
+
+Seamless Integration: Frontend form data is sent via HTTP request to n8n, which processes and returns the AI-generated recipe.
+
+Scalable Setup: Easy to plug in other LLMs or custom prompts in the same n8n workflow.
+
 Technical Notes:
 
 
-Authentication handled by Supabase
 
-State management with Zustand
+Authentication is managed entirely through Supabase’s Magic Link auth
 
-Form data persists across steps
+Zustand is used for efficient state control across pages
 
-Recipe output formatted for easy reading
+Advanced animations for modern UI+
+Data and form persistence for smooth UX
 
-Advanced animations! 
+LLM response formatted and presented clearly to user!
+
